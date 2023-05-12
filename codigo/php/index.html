@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Home</title>
+</head>
+<body>
+  <!-- Sección principal -->
+  <section>
+    <h1>Home</h1>
+    <button id="logout">logout</button>
+    <?php include "conexion.php"; ?>
+
+	<?php
+	$sql = "SELECT * FROM usuarios";
+	$result = mysqli_query($conn, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		echo "<table>";
+		echo "<tr><th>ID</th><th>Nombre</th><th>Email</th><th>Acciones</th></tr>";
+		while($row = mysqli_fetch_assoc($result)) {
+			echo "<tr>";
+			echo "<td>" . $row["id"]. "</td>";
+			echo "<td>" . $row["nombre"]. "</td>";
+			echo "<td>" . $row["Mail"]. "</td>";
+            echo "<td>" . $row["Contraseña"]. "</td>";
+			echo "<td><a href='db.php'>Editar</a> <a href='eliminar.php?id=" . $row["id"] . "'>Eliminar</a></td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+	} else {
+		echo "0 resultados";
+	}
+
+	mysqli_close($conn);
+	?>
+</section>
+
+<!-- Script de php -->
+<script src="index.php"></script>
+</body>
+</html>

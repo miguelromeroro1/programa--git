@@ -10,16 +10,16 @@
 <body>
     <section>
         <h2>login</h2>
-        <form id="loginform">
+        <form id="loginform" method="POST" action="codigo/php/login.php">
             <label>Mail</label>
-            <input type="email" placeholder="..." id="email" required autofocus>
+            <input type="email" placeholder="..." id="email" name="email" required autofocus>
             <label>Contraseña</label>
-            <input type="password" placeholder="..." id="password" required>
+            <input type="password" placeholder="..." id="password" name="password" required>
             <input type="submit" value="ingresar">
         </form>
         <p>no tienes una cuenta? <a href="signup.html">Registro</a></p>
-        <script src="login.js"></script>
     </section>
     
 </body>
 </html>
+
