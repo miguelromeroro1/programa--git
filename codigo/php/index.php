@@ -1,4 +1,5 @@
 <?php
+include "conexion.php";
 // Iniciar sesión para acceder a la variable $_SESSION
 session_start();
 
@@ -33,3 +34,4 @@ if (isset($_POST['logout'])) {
 	</form>
 </body>
 </html>
+

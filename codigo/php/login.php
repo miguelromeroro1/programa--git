@@ -1,4 +1,5 @@
 <?php
+include "conexion.php";
 // Verificamos si se ha enviado el formulario de inicio de sesión
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Obtenemos los valores de los campos de correo electrónico y contraseña
@@ -7,19 +8,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $servername = "localhost";
     $username = "root";
-    $password = ""; // Deja el campo de contraseña vacío
+    $dbPassword = "1234"; // Deja el campo de contraseña vacío
     $dbname = "nolonecesito.com"; // Nombre de tu base de datos
-    
-    $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
+
+    $conn = new mysqli($servername, $username, $dbPassword, $dbname);
 
     // Verificamos si se ha establecido la conexión con la base de datos
-    if (mysqli_connect_error()) {
-        die('Error de conexión a la base de datos (' . mysqli_connect_errno() . ') '
-            . mysqli_connect_error());
+    if ($conn->connect_error) {
+        die('Error de conexión a la base de datos (' . $conn->connect_errno . ') '
+            . $conn->connect_error);
     } else {
         // Escapamos los valores de correo electrónico y contraseña para evitar inyección de SQL
-        $email = mysqli_real_escape_string($conn, $email);
-        $password = mysqli_real_escape_string($conn, $password);
+        $email = $conn->real_escape_string($email);
+        $password = $conn->real_escape_string($password);
 
         // Realizamos una consulta preparada para evitar inyección de SQL
         $sql = "SELECT * FROM users WHERE email=? AND password=?";
